@@ -1,0 +1,14 @@
+#!/bin/bash
+
+user=${1:-zephod}
+shift
+
+here=$(dirname "${BASH_SOURCE[0]}")
+
+docker run -it --rm \
+-v ${here}/homes:/home \
+-v ${here}/data:/data \
+-v ${here}/users:/etc/users \
+-v ${here}/keys:/opt/keys \
+-e USERNAME=$user \
+rcs/gpg "$@"
